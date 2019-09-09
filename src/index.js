@@ -420,19 +420,20 @@ class TagsInput extends React.Component {
     })
   }
 
-  componentWillReceiveProps (nextProps) {
-    /* istanbul ignore next */
-    if (this.hasControlledInput()) {
-      return
-    }
+  componentDidUpdate (prevProps) {
+    if (this.props !== prevProps) {
+      if (this.hasControlledInput()) {
+        return
+      }
 
-    if (!this.inputValue(nextProps)) {
-      return
-    }
+      if (!this.inputValue(this.props)) {
+        return
+      }
 
-    this.setState({
-      tag: this.inputValue(nextProps)
-    })
+      this.setState({
+        tag: this.inputValue(this.props)
+      })
+    }
   }
 
   render () {
